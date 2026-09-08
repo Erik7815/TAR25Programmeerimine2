@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ShopTAR.Core\ShopTAR25.Core.csproj" />
     <ProjectReference Include="..\ShopTAR.Data\ShopTAR25.Data.csproj" />
   </ItemGroup>
 
