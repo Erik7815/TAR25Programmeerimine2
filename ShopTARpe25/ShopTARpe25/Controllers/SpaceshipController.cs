@@ -1,19 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopTARpe25.Models.Spaceship;
 using ShopTARpe25.Core.Dto;
-using AspNetCoreGeneratedDocument;
 using ShopTARpe25.Core.ServiceInterface;
+
 
 namespace ShopTARpe25.Controllers
 {
     public class SpaceshipController : Controller
     {
         private readonly ISpaceshipServices _spaceshipService;
-        public SpaceshipController(ISpaceshipServices spaceshipService)
+
+        //teha constructor et saaks kasutada teenust, mis on
+        //defineeritud ISpaceshipServices liideses
+        public SpaceshipController
+            (
+                ISpaceshipServices spaceshipService
+            )
         {
             _spaceshipService = spaceshipService;
         }
-            
+
+
         public IActionResult Index()
         {
             return View();
@@ -32,6 +39,9 @@ namespace ShopTARpe25.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(SpaceshipCreateViewModel vm)
         {
+            //luua vaheinstants, mis sisaldab andmeid, mis on saadud vormist
+            //need andmed tuleb edasi saata dto-sse, mis on mõeldud andmebaasi salvestamiseks
+
             var dto = new SpaceshipDto
             {
                 Name = vm.Name,
@@ -40,11 +50,11 @@ namespace ShopTARpe25.Controllers
                 Crew = vm.Crew,
                 EnginePower = vm.EnginePower
             };
-            var result = await _Spaceship_Create.Create(dto);
+
+            //kutsuda teenuse meetodit, mis salvestab andmed andmebaasi
+            var result = await _spaceshipService.Create(dto);
+
             return RedirectToAction(nameof(Index));
         }
-        //luua vaheinstants mis sisaldab andmeid mis on saadud vormist
-        //    need andmed tuleb edasi anda dto-ssse mis on mõeldud andmebaasi salvestamiseks
-
-    } 
+    }
 }

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ShopTARpe25.Core.ServiceInterface;
+using ShopTARpe25.Data;
 
 namespace ShopTARpe25
 {
@@ -14,7 +15,8 @@ namespace ShopTARpe25
 
             builder.Services.AddScoped<ISpaceshipServices, ISpaceshipServices>();
 
-            builder.Services.AddDbContext<ShopTARpe25Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDbContext<ShopTARpe25Context>(options => 
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
