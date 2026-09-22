@@ -1,0 +1,65 @@
+﻿@model ShopTARpe25.Models.Spaceship.SpaceshipDeleteViewModel
+<dl class="row">
+    <div>
+        <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+        @Html.DisplayFor(model => model.Id)
+    </div>
+</dl>
+
+<dl class="row">
+    <div>
+        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+        @Html.DisplayFor(model => model.Name)
+    </div>
+</dl>
+
+
+<dl class="row">
+    <div>
+        <label asp-for="Classification" class="col-sm-2 col-form-label"></label>
+        @Html.DisplayFor(model => model.Classification)
+    </div>
+</dl>
+
+
+<dl class="row">
+    <div>
+        <label asp-for="BuiltDate" class="col-sm-2 col-form-label"></label>
+        @Html.DisplayFor(model => model.BuiltDate)
+    </div>
+</dl>
+
+<dl class="row">
+    <div>
+        <label asp-for="Crew" class="col-sm-2 col-form-label"></label>
+        @Html.DisplayFor(model => model.Crew)
+    </div>
+</dl>
+
+<dl class="row">
+    <div>
+        <label asp-for="EnginePower" class="col-sm-2 col-form-label"></label>
+        @Html.DisplayFor(model => model.EnginePower)
+    </div>
+</dl>
+
+<dl class="row">
+    <div>
+        <label asp-for="CreatedAt" class="col-sm-2 col-form-label"></label>
+        @Html.DisplayFor(model => model.CreatedAt)
+    </div>
+</dl>
+
+<dl class="row">
+    <div>
+        <label asp-for="ModifiedAt" class="col-sm-2 col-form-label"></label>
+        @Html.DisplayFor(model => model.ModifiedAt)
+    </div>
+</dl>
+
+<hr />
+<form asp-action="DeleteConfirmation">
+    <input type="hidden" asp-for="Id" />
+    <a asp-action="Index" asp-controller="spaceship"class="btn btn-success">Back</a>
+</form>
+

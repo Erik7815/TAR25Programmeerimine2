@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Identity.Client;
 using ShopTARpe25.Core.Domain;
 using ShopTARpe25.Core.Dto;
 using ShopTARpe25.Core.ServiceInterface;
@@ -22,6 +20,7 @@ namespace ShopTARpe25.ApplicationServices.Services
         {
             _context = context;
         }
+
         public async Task<Spaceship> Create(SpaceshipDto dto)
         {
             Spaceship domain = new();
@@ -47,6 +46,8 @@ namespace ShopTARpe25.ApplicationServices.Services
             return domain;
         }
 
+        //siia teha meetod nimega DetailsAsync
+        //see ainult p'rib andmed contextist
         public async Task<Spaceship> DetailsAsync(Guid id)
         {
             var result = await _context.Spaceships
@@ -54,58 +55,34 @@ namespace ShopTARpe25.ApplicationServices.Services
 
             return result;
         }
-        public async Task<Spaceship> Details(SpaceshipDto vm)
+
+        public async Task<Spaceship> Update(SpaceshipDto dto)
         {
             Spaceship spaceship = new();
-            vm.Id = spaceship.Id;
-            vm.Name = spaceship.Name;
-            vm.Classification = spaceship.Classification;
-            vm.BuiltDate = spaceship.BuiltDate;
-            vm.Crew = spaceship.Crew;
-            vm.EnginePower = spaceship.EnginePower;
-            vm.CreatedAt = spaceship.CreatedAt;
-            vm.ModifiedAt = spaceship.ModifiedAt;
+
+            spaceship.Id = dto.Id;
+            spaceship.Name = dto.Name;
+            spaceship.Classification = dto.Classification;
+            spaceship.BuiltDate = dto.BuiltDate;
+            spaceship.Crew = dto.Crew;
+            spaceship.EnginePower = dto.EnginePower;
+            spaceship.CreatedAt = dto.CreatedAt;
+            spaceship.ModifiedAt = DateTime.Now;
 
             _context.Spaceships.Update(spaceship);
             await _context.SaveChangesAsync();
 
             return spaceship;
         }
-        [HttpGet]
-        public async Task<IActionResult> Update(Guid id)
+        public async Task<Spaceship>Delete(Guid id)
         {
-            var spaceship = await _spaceshipService.DetailsAsync(id);
-            if (spaceship == null)
-            {
-                return NotFound();
-            }
-            var vm = SpaceshipUpdateViewModel()
-                Spaceship spaceship = new();
-            vm.Id = spaceship.Id;
-            vm.Name = spaceship.Name;
-            vm.Classification = spaceship.Classification;
-            vm.BuiltDate = spaceship.BuiltDate;
-            vm.Crew = spaceship.Crew;
-            vm.EnginePower = spaceship.EnginePower;
-            vm.CreatedAt = spaceship.CreatedAt;
-            vm.ModifiedAt = spaceship.ModifiedAt;
+            var result = await _context.Spaceships
+                .FirstOrDefaultAsync(x => x.Id == id);
 
-            return View(vm)
-        }
-        [HttpPost]
-        public async Task<IActionResult> Update(SpaceshipUpdateViewModel vm)
-        {
-            var dto = new SpaceshipDto()
-            {
-                Id = vm.Id,
-                Name = vm.Name,
-                Classification = vm.Classfication,
-                Crew = vm.Crew,
-                EnginePower = vm.EnginePower,
-                BuiltDate = vm.BuiltDate,
-                CreatedAt = vm.CreatedAt,
-                ModifiedAt = vm.ModifiedAt
-            }
+            _context.Spaceships.Remove(result);
+            await _context.SaveChangesAsync();
+
+            return result;
         }
     }
 }
