@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Kindergarden\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kindergarden.Core\Kindergarden.Core.csproj" />
+    <ProjectReference Include="..\Kindergarden.Data\Kindergarden.Data.csproj" />
+  </ItemGroup>
+
+</Project>
