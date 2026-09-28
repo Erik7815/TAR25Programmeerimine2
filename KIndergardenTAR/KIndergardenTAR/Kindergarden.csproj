@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Kindergarden.ApplicationServices\Kindergarden.ApplicationServices.csproj" />
     <ProjectReference Include="..\Kindergarden.Core\Kindergarden.Core.csproj" />
     <ProjectReference Include="..\Kindergarden.Data\Kindergarden.Data.csproj" />
   </ItemGroup>

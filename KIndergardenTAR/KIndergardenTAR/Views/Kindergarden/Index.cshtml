@@ -1,0 +1,50 @@
+﻿﻿@model IEnumerable<Kindergarden.Models.Kindergarden.KindergardenIndexViewModel>
+
+@{
+    int rowNumber = 1;
+}
+
+
+<div>
+    <a asp-action="create" asp-controller="Kindergarden" type="submit" class="btn btn-primary">Create</a>
+</div>
+
+<div class="h1">
+    Kindergarden
+</div>
+<form method="get">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">GroupName</th>
+                <th scope="col">ChildrenCount</th>
+                <th scope="col">KindergardenName</th>
+                <th scope="col">TeacherName</th>
+                <th scope="col">CreatedAt</th>
+                <th scope="col">UpdatedAt</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var spaceship in Model)
+            {
+                <tr>
+                    <td>@rowNumber</td>
+                    <td>@Kindergarden.GroupName</td>
+                    <td>@Kindergarden.ChildrenCount</td>
+                    <td>@Kindergarden.KindergardenName</td>
+                    <td>@Kindergarden.TeacherName</td>
+                    <td>@Kindergarden.CreatedAt</td>
+                    <td>@Kindergarden.UpdatedAt</td>
+                    <td>
+                        <a asp-action="details" asp-controller="Kindregarden" asp-route-id="@Kindergarden.Id" type="submit" class="btn btn-info">Details</a>
+                        <a asp-action="update" asp-controller="Kindergarden" asp-route-id="@Kindergarden.Id" type="submit" class="btn btn-success">Update</a>
+                        <a asp-action="delete" asp-controller="Kindergarden" asp-route-id="@Kindergarden.Id" type="submit" class="btn btn-danger">Delete</a>
+
+                    </td>
+                </tr>
+                rowNumber++;
+            }
+        </tbody>
+    </table>
+</form>

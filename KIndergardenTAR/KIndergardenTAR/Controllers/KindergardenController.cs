@@ -22,6 +22,26 @@ namespace Kindergarden.Controllers
             _context = context;
         }
         [HttpGet]
+        public IActionResult Index()
+        {
+            var result = _context.Kindergardens
+            .Select(x => new KindergardenIndexViewModel
+            {
+                Id = x.Id,
+                GroupName = x.GroupName,
+                ChildrenCount = x.ChildrenCount,
+                KindergartenName = x.KindergartenName,
+                TeacherName = x.TeacherName,
+                CreatedAt = x.CreatedAt,
+                UpdatedAt = x.UpdatedAt
+
+            });
+
+
+
+            return View(result);
+        }
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -69,4 +89,5 @@ namespace Kindergarden.Controllers
             };
             return View(vm);
         }
+    }
 }
