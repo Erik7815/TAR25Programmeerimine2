@@ -41,6 +41,37 @@ namespace Kindergarden.ApplicationServices.Services
             var domain = await _context.Kindergardens.FindAsync(id);
             return domain;
         }
-        
+        public async Task<KindergardenDomain> Delete(Guid id)
+        {
+
+            var result = await _context.Kindergardens
+                .FirstOrDefaultAsync(x => x.Id == id);
+            if (result == null)
+            {
+                return null;
+            }
+            _context.Kindergardens.Remove(result);
+            await _context.SaveChangesAsync();
+
+            return result;
+        }
+        public async Task<KindergardenDomain> Update(KindergardenDto dto)
+        {
+            KindergardenDomain kindergarden = new();
+            {
+                kindergarden.Id = dto.Id;
+                kindergarden.GroupName = dto.GroupName;
+                kindergarden.ChildrenCount = dto.ChildrenCount;
+                kindergarden.KindergartenName = dto.KindergartenName;
+                kindergarden.TeacherName = dto.TeacherName;
+                kindergarden.CreatedAt = dto.CreatedAt;
+                kindergarden.UpdatedAt = DateTime.Now;
+            }
+
+            _context.Kindergardens.Update(kindergarden);
+            await _context.SaveChangesAsync();
+
+            return kindergarden;
+        }
     }
 }

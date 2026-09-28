@@ -9,5 +9,7 @@ namespace Kindergarden.Core.ServiceInterface
     {
         Task<KindergardenDomain> Create(KindergardenDto dto);
         Task<KindergardenDomain> Details(Guid id);
+        Task<KindergardenDomain> Delete(Guid id);
+        Task<KindergardenDomain> Update(KindergardenDto dto);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Kindergarden.Core.Dto;
+﻿using Kindergarden.ApplicationServices.Services;
+using Kindergarden.Core.Dto;
 using Kindergarden.Core.ServiceInterface;
 using Kindergarden.Data;
 using Kindergarden.Models.Kindergarden;
@@ -88,6 +89,85 @@ namespace Kindergarden.Controllers
                 UpdatedAt = result.UpdatedAt
             };
             return View(vm);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var result = await _kindergardenServices.Details(id);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new KindergardenDeleteViewModel
+            {
+                Id = result.Id,
+                GroupName = result.GroupName,
+                ChildrenCount = result.ChildrenCount,
+                KindergartenName = result.KindergartenName,
+                TeacherName = result.TeacherName,
+                CreatedAt = result.CreatedAt,
+                UpdatedAt = result.UpdatedAt
+            };
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePost(Guid id)
+        {
+            await _kindergardenServices.Delete(id);
+
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        public async Task<IActionResult> Update(Guid id)
+        {
+            var kindergarden = await _kindergardenServices.Details(id);
+
+            if (kindergarden == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new KindergardenUpdateViewModel();
+            {
+                vm.Id = kindergarden.Id;
+                vm.GroupName = kindergarden.GroupName;
+                vm.ChildrenCount = kindergarden.ChildrenCount;
+                vm.KindergartenName = kindergarden.KindergartenName;
+                vm.TeacherName = kindergarden.TeacherName;
+                vm.CreatedAt = kindergarden.CreatedAt;
+                vm.UpdatedAt = kindergarden.UpdatedAt;
+
+                return View(vm);
+            }
+
+
+
+        }
+        [HttpPost]
+
+        public async Task<IActionResult> Update(KindergardenUpdateViewModel vm)
+        {
+            var dto = new KindergardenDto();
+            {
+                dto.Id = vm.Id;
+                dto.GroupName = vm.GroupName;
+                dto.ChildrenCount = vm.ChildrenCount;
+                dto.KindergartenName = vm.KindergartenName;
+                dto.TeacherName = vm.TeacherName;
+                dto.CreatedAt = vm.CreatedAt;
+                dto.UpdatedAt = DateTime.Now;
+            }
+            var result = await _kindergardenServices.Update(dto);
+            if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

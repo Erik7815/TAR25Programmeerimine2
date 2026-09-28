@@ -1,0 +1,48 @@
+﻿@model Kindergarden.Models.Kindergarden.KindergardenDeleteViewModel
+
+<dl class="row">
+    <div>
+        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+        @Html.DisplayFor(Model => Model.GroupName)
+    </div>
+</dl>
+
+<dl class="row">
+    <div>
+        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+        @Html.DisplayFor(model => model.ChildrenCount)
+    </div>
+</dl>
+
+<dl class="row">
+    <div>
+        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+        @Html.DisplayFor(model => model.KindergardenName)
+    </div>
+</dl>
+
+<dl class="row">
+    <div>
+        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+        @Html.DisplayFor(model => model.TeacherName)
+    </div>
+</dl>
+
+<dl class="row">
+    <div>
+        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+        @Html.DisplayFor(model => model.GroupName)
+    </div>
+</dl>
+
+
+<form asp-action="DeletePost" method="post">
+                    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">
+        Delete
+    </button>
+
+    <a asp-action="Index"
+       asp-controller="Kindergarden"class="btn btn-secondary"> Back to list
+    </a>
+</form>
