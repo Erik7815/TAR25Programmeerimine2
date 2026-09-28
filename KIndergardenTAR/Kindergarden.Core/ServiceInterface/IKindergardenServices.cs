@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Kindergarden.Core.Domain;
+using Kindergarden.Core.Dto;
+using Kindergarden.Core.Domain;
+
 
 namespace Kindergarden.Core.ServiceInterface
 {
-    internal interface IKindergardenServices
+    public interface IKindergardenServices
     {
+        Task<KindergardenDomain> Create(KindergardenDto dto);
     }
 }

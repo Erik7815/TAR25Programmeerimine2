@@ -18,5 +18,23 @@ namespace Kindergarden.ApplicationServices.Services
         {
             _context = context;
         }
+
+        public async Task<KindergardenDomain> Create(KindergardenDto dto)
+        {
+            KindergardenDomain domain = new();
+            {
+                domain.Id = dto.Id;
+                domain.GroupName = dto.GroupName;
+                domain.ChildrenCount = dto.ChildrenCount;
+                domain.KindergartenName = dto.KindergartenName;
+                domain.TeacherName = dto.TeacherName;
+                domain.CreatedAt = DateTime.Now;
+                domain.UpdatedAt = DateTime.Now;
+            }
+            ;
+            _context.Kindergardens.Add(domain);
+            await _context.SaveChangesAsync();
+            return domain;
+        }
     }
 }
