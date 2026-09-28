@@ -56,10 +56,10 @@
         @Html.DisplayFor(model => model.ModifiedAt)
     </div>
 </dl>
-
+<a asp-action="Index" asp-controller="spaceship" class="btn btn-secondary">Back</a>
 <hr />
 <form asp-action="DeleteConfirmation">
     <input type="hidden" asp-for="Id" />
-    <a asp-action="Index" asp-controller="spaceship"class="btn btn-success">Back</a>
+    <input type="submit" value="Delete" class="btn btn-danger" />
 </form>
 
