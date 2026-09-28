@@ -50,5 +50,23 @@ namespace Kindergarden.Controllers
             }
             return View(vm);
         }
-    }
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var result = await _kindergardenServices.Details(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            var vm = new KindergardenDetailsViewModel
+            {
+                Id = result.Id,
+                GroupName = result.GroupName,
+                ChildrenCount = result.ChildrenCount,
+                KindergartenName = result.KindergartenName,
+                TeacherName = result.TeacherName,
+                CreatedAt = result.CreatedAt,
+                UpdatedAt = result.UpdatedAt
+            };
+            return View(vm);
+        }
 }

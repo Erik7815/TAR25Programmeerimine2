@@ -8,5 +8,6 @@ namespace Kindergarden.Core.ServiceInterface
     public interface IKindergardenServices
     {
         Task<KindergardenDomain> Create(KindergardenDto dto);
+        Task<KindergardenDomain> Details(Guid id);
     }
 }

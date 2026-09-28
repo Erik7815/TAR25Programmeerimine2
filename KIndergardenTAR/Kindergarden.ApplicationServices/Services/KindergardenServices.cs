@@ -36,5 +36,11 @@ namespace Kindergarden.ApplicationServices.Services
             await _context.SaveChangesAsync();
             return domain;
         }
+        public async Task<KindergardenDomain> Details(Guid id)
+        {
+            var domain = await _context.Kindergardens.FindAsync(id);
+            return domain;
+        }
+        
     }
 }

@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Kindergarden.Core\Kindergarden.Core.csproj" />
     <ProjectReference Include="..\Kindergarden.Data\Kindergarden.Data.csproj" />
   </ItemGroup>
