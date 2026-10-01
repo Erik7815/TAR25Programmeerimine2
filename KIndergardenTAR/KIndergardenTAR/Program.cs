@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Kindergarden.ApplicationServices.Services;
 using Kindergarden.Core.ServiceInterface;
 
-namespace KindergartenCRUD
+namespace KindergardenTAR
 {
     public class Program
     {
-        public static void Main(string[] args)
+       
+            public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 

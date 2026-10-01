@@ -1,4 +1,4 @@
-﻿namespace Kindergarden.Models
+namespace KindergardenTAR.Models
 {
     public class ErrorViewModel
     {

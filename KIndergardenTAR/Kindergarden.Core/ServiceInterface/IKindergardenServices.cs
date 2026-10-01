@@ -1,7 +1,8 @@
 ﻿using Kindergarden.Core.Domain;
 using Kindergarden.Core.Dto;
-using Kindergarden.Core.Domain;
-
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Kindergarden.Core.ServiceInterface
 {

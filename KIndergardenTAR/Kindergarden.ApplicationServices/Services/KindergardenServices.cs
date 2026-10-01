@@ -10,6 +10,8 @@ namespace Kindergarden.ApplicationServices.Services
 {
     public class KindergardenServices : IKindergardenServices
     {
+
+
         private readonly KindergardenContext _context;
         public KindergardenServices
         (

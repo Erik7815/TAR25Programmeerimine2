@@ -1,8 +1,8 @@
-﻿using Kindergarden.Models;
+using KindergardenTAR.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Kindergarden.Controllers
+namespace KindergardenTAR.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,4 +1,4 @@
-﻿namespace Kindergarden.Models.Kindergarden
+﻿namespace KindergardenTAR.Models.Kindergarden
 {
     public class KindergardenIndexViewModel
     {

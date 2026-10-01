@@ -1,12 +1,12 @@
-﻿using Kindergarden.ApplicationServices.Services;
+﻿﻿using Kindergarden.ApplicationServices.Services;
 using Kindergarden.Core.Dto;
 using Kindergarden.Core.ServiceInterface;
 using Kindergarden.Data;
-using Kindergarden.Models.Kindergarden;
+using KindergardenTAR.Models.Kindergarden;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace Kindergarden.Controllers
+namespace KindergardenTAR.Controllers
 {
     public class KindergardenController : Controller
     {

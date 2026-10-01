@@ -2,5 +2,5 @@
   <Project Path="Kindergarden.ApplicationServices/Kindergarden.ApplicationServices.csproj" />
   <Project Path="Kindergarden.Core/Kindergarden.Core.csproj" />
   <Project Path="Kindergarden.Data/Kindergarden.Data.csproj" />
-  <Project Path="KIndergardenTAR/Kindergarden.csproj" />
+  <Project Path="KindergardenTAR/KindergardenTAR.csproj" />
 </Solution>
