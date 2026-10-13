@@ -10,6 +10,7 @@ namespace Kindergarden.Data
 
         }
         public DbSet<KindergardenDomain> Kindergardens { get; set; }
-    {
+        public DbSet<FileToApi> FileToApis { get; set; }
+    
     }
 }

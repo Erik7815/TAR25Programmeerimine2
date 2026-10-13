@@ -12,15 +12,18 @@ namespace KindergardenTAR.Controllers
     {
         private readonly IKindergardenServices _kindergardenServices;
         private readonly KindergardenContext _context;
+        private readonly IFileService _fileService;
 
         public KindergardenController
             (
             IKindergardenServices KindergardenServices,
-            KindergardenContext context
+            KindergardenContext context,
+            IFileService fileService
             )
         {
             _kindergardenServices = KindergardenServices;
             _context = context;
+            _fileService = fileService;
         }
         [HttpGet]
         public IActionResult Index()
@@ -61,7 +64,15 @@ namespace KindergardenTAR.Controllers
                     KindergartenName = vm.KindergartenName,
                     TeacherName = vm.TeacherName,
                     CreatedAt = vm.CreatedAt,
-                    UpdatedAt = vm.UpdatedAt
+                    UpdatedAt = vm.UpdatedAt,
+                    Files = vm.Files,
+                    FileToApiDtos = vm.Image
+                    .Select(file => new FileToApiDto
+                    {
+                        Id = file.ImageId,
+                        ExistingFilePath = file.FilePath,
+                        SpaceshipId = file.KindergardenId
+                    }).ToArray()
                 };
 
 
@@ -78,6 +89,14 @@ namespace KindergardenTAR.Controllers
             {
                 return NotFound();
             }
+            var images = await _context.FileToApis
+                .Where(x => x.KindergardenId == id)
+                .Select(y => new ImageViewModel
+                {
+                    FilePath = /*"~/multipleFileUpload/" +*/ y.ExistingFilePath,
+                    ImageId = y.Id,
+                    KindergardenId = y.KindergardenId
+                }).ToArrayAsync();
             var vm = new KindergardenDetailsViewModel
             {
                 Id = result.Id,
@@ -86,7 +105,8 @@ namespace KindergardenTAR.Controllers
                 KindergartenName = result.KindergartenName,
                 TeacherName = result.TeacherName,
                 CreatedAt = result.CreatedAt,
-                UpdatedAt = result.UpdatedAt
+                UpdatedAt = result.UpdatedAt,
+                vm.Images.AddRange(images);
             };
             return View(vm);
         }
@@ -99,6 +119,14 @@ namespace KindergardenTAR.Controllers
             {
                 return NotFound();
             }
+            var images = await _context.FileToApis
+                .Where(x => x.KindergadenId == id)
+                .Select(y => new ImageViewModel
+                {
+                    FilePath = y.ExistingFilePath,
+                    ImageId = y.Id,
+                    KindergardenId = y.KindergardenId
+                }).ToArrayAsync();
 
             var vm = new KindergardenDeleteViewModel
             {
@@ -108,8 +136,9 @@ namespace KindergardenTAR.Controllers
                 KindergartenName = result.KindergartenName,
                 TeacherName = result.TeacherName,
                 CreatedAt = result.CreatedAt,
-                UpdatedAt = result.UpdatedAt
-            };
+                UpdatedAt = result.UpdatedAt,
+                vm.Image.AddRange(images);
+            
 
             return View(vm);
         }

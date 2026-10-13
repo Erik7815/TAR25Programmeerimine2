@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿using Microsoft.AspNetCore.Http;
 namespace Kindergarden.Core.Dto
 {
     public class KindergardenDto
@@ -11,6 +8,9 @@ namespace Kindergarden.Core.Dto
         public int? ChildrenCount { get; set; }
         public string KindergartenName { get; set; } = string.Empty;
         public string TeacherName { get; set; } = string.Empty;
+        public List<IFormFile> Files { get; set; }
+        public IEnumerable<FileToApiDto> FileToApiDtos { get; set; }
+            = new List<FileToApiDto>();
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }
