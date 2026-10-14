@@ -134,7 +134,8 @@ namespace KindergardenTAR.Controllers
                 vm.CreatedAt = result.CreatedAt;
                 vm.UpdatedAt = result.UpdatedAt;
                 vm.Image.AddRange(images);
-            };
+            }
+            ;
 
             return View(vm);
         }
@@ -199,6 +200,24 @@ namespace KindergardenTAR.Controllers
             }
             var result = await _kindergardenServices.Update(dto);
             if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public async Task<IActionResult> RemoveImage(ImageViewModel vm)
+        {
+            //tuleb ühendada dto ja viewModel, et saaks kasutada teenuse meetodit
+            var dto = new FileToApiDto()
+            {
+                Id = vm.ImageId
+            };
+            //kutsuda teenuse meetodit, mis kustutab pildi andmebaasist
+            var image = await _fileService.RemoveImageFromApi(dto);
+
+            if (image == null)
             {
                 return RedirectToAction(nameof(Index));
             }
