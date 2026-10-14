@@ -95,7 +95,6 @@ namespace KindergardenTAR.Controllers
                 {
                     FilePath = /*"~/multipleFileUpload/" +*/ y.ExistingFilePath,
                     ImageId = y.Id,
-                    KindergardenId = y.KindergardenId
                 }).ToArrayAsync();
             var vm = new KindergardenDetailsViewModel
             {
@@ -106,7 +105,6 @@ namespace KindergardenTAR.Controllers
                 TeacherName = result.TeacherName,
                 CreatedAt = result.CreatedAt,
                 UpdatedAt = result.UpdatedAt,
-                vm.Images.AddRange(images);
             };
             return View(vm);
         }
@@ -120,25 +118,23 @@ namespace KindergardenTAR.Controllers
                 return NotFound();
             }
             var images = await _context.FileToApis
-                .Where(x => x.KindergadenId == id)
+                .Where(x => x.KindergardenId == id)
                 .Select(y => new ImageViewModel
                 {
                     FilePath = y.ExistingFilePath,
                     ImageId = y.Id,
-                    KindergardenId = y.KindergardenId
                 }).ToArrayAsync();
 
-            var vm = new KindergardenDeleteViewModel
+            var vm = new KindergardenDeleteViewModel();
             {
-                Id = result.Id,
-                GroupName = result.GroupName,
-                ChildrenCount = result.ChildrenCount,
-                KindergartenName = result.KindergartenName,
-                TeacherName = result.TeacherName,
-                CreatedAt = result.CreatedAt,
-                UpdatedAt = result.UpdatedAt,
+                vm.GroupName = result.GroupName;
+                vm.ChildrenCount = result.ChildrenCount;
+                vm.KindergartenName = result.KindergartenName;
+                vm.TeacherName = result.TeacherName;
+                vm.CreatedAt = result.CreatedAt;
+                vm.UpdatedAt = result.UpdatedAt;
                 vm.Image.AddRange(images);
-            
+            };
 
             return View(vm);
         }
@@ -150,6 +146,9 @@ namespace KindergardenTAR.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+
+
         [HttpGet]
         public async Task<IActionResult> Update(Guid id)
         {
@@ -159,6 +158,14 @@ namespace KindergardenTAR.Controllers
             {
                 return NotFound();
             }
+            var images = await _context.FileToApis
+           .Where(x => x.KindergardenId == id)
+           .Select(y => new ImageViewModel
+           {
+               FilePath = /*~/multipleFileUpload/" + */y.ExistingFilePath,
+               ImageId = y.Id
+           }).ToArrayAsync();
+
 
             var vm = new KindergardenUpdateViewModel();
             {
