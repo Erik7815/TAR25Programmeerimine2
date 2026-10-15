@@ -15,10 +15,11 @@ namespace KindergardenTAR
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddScoped<IKindergardenServices, KindergardenServices>();
+            builder.Services.AddScoped<IFileServices, FileServices>();
 
             builder.Services.AddDbContext<KindergardenContext>(options =>
                 options.UseSqlServer(
-                    builder.Configuration.GetConnectionString("KindergardenDB")));
+                    builder.Configuration.GetConnectionString("KindergardenDb")));
 
             var app = builder.Build();
 
