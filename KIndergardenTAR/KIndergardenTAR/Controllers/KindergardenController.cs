@@ -12,13 +12,13 @@ namespace KindergardenTAR.Controllers
     {
         private readonly IKindergardenServices _kindergardenServices;
         private readonly KindergardenContext _context;
-        private readonly IFileService _fileService;
+        private readonly IFileServices _fileService;
 
         public KindergardenController
             (
             IKindergardenServices KindergardenServices,
             KindergardenContext context,
-            IFileService fileService
+            IFileServices fileService
             )
         {
             _kindergardenServices = KindergardenServices;

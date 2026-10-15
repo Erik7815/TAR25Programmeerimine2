@@ -4,7 +4,7 @@ using Kindergarden.Core.Dto;
 
 namespace Kindergarden.Core.ServiceInterface
 {
-    public interface IFileService
+    public interface IFileServices
     {
         void FilesToApi(KindergardenDto dto, KindergardenDomain domain);
         Task<FileToApi> RemoveImageFromApi(FileToApiDto dto);

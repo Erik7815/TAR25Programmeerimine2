@@ -7,7 +7,7 @@ using Kindergarden.Data;
 
 namespace Kindergarden.ApplicationServices.Services
 {
-    public class FileServices : IFileService
+    public class FileServices : IFileServices
     {
         private readonly KindergardenContext _context;
         private readonly IHostEnvironment _webHost;

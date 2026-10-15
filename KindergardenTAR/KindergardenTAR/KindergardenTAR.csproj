@@ -23,11 +23,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.13" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Kindergarden.ApplicationServices\Kindergarden.ApplicationServices.csproj" />
-    <ProjectReference Include="..\Kindergarden.Data\Kindergarden.Data.csproj" />
+    <ProjectReference Include="..\Kindergarden.Core\Kindergarden.Core.csproj" />
   </ItemGroup>
 
 </Project>
