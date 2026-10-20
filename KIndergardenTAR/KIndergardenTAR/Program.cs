@@ -19,7 +19,7 @@ namespace KindergardenTAR
 
             builder.Services.AddDbContext<KindergardenContext>(options =>
                 options.UseSqlServer(
-                    builder.Configuration.GetConnectionString("KindergardenDb")));
+                    builder.Configuration.GetConnectionString("KindergartenDb")));
 
             var app = builder.Build();
 

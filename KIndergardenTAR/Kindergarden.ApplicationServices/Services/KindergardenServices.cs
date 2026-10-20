@@ -1,6 +1,4 @@
-﻿using Kindergarden.ApplicationServices;
-using Kindergarden.Core;
-using Kindergarden.Core.Domain;
+﻿using Kindergarden.Core.Domain;
 using Kindergarden.Core.Dto;
 using Kindergarden.Core.ServiceInterface;
 using Kindergarden.Data;
@@ -13,12 +11,15 @@ namespace Kindergarden.ApplicationServices.Services
 
 
         private readonly KindergardenContext _context;
+        private readonly IFileServices _fileServices;
         public KindergardenServices
         (
-        KindergardenContext context
+        KindergardenContext context,
+            IFileServices fileServices
         )
         {
             _context = context;
+            _fileServices = fileServices;
         }
 
         public async Task<KindergardenDomain> Create(KindergardenDto dto)
@@ -32,9 +33,10 @@ namespace Kindergarden.ApplicationServices.Services
                 domain.TeacherName = dto.TeacherName;
                 domain.CreatedAt = DateTime.Now;
                 domain.UpdatedAt = DateTime.Now;
+                _fileServices.FilesToApi(dto, domain);
             }
             ;
-            _context.Kindergardens.Add(domain);
+             await _context.Kindergardens.AddAsync(domain);
             await _context.SaveChangesAsync();
             return domain;
         }
@@ -68,6 +70,7 @@ namespace Kindergarden.ApplicationServices.Services
                 kindergarden.TeacherName = dto.TeacherName;
                 kindergarden.CreatedAt = dto.CreatedAt;
                 kindergarden.UpdatedAt = DateTime.Now;
+                _fileServices.FilesToApi(dto, kindergarden);
             }
 
             _context.Kindergardens.Update(kindergarden);
@@ -75,5 +78,6 @@ namespace Kindergarden.ApplicationServices.Services
 
             return kindergarden;
         }
+        //delete
     }
 }

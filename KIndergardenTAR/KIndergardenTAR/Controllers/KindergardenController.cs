@@ -77,11 +77,15 @@ namespace KindergardenTAR.Controllers
 
 
                 var result = await _kindergardenServices.Create(dto);
-
+                if (result == null)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(vm);
         }
+        [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
             var result = await _kindergardenServices.Details(id);
