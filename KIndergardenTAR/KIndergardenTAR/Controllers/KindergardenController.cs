@@ -48,6 +48,7 @@ namespace KindergardenTAR.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            KindergardenCreateViewModel vm = new();
             return View();
         }
 
@@ -56,6 +57,7 @@ namespace KindergardenTAR.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 var dto = new KindergardenDto
                 {
                     Id = vm.Id,
@@ -63,8 +65,6 @@ namespace KindergardenTAR.Controllers
                     ChildrenCount = vm.ChildrenCount,
                     KindergartenName = vm.KindergartenName,
                     TeacherName = vm.TeacherName,
-                    CreatedAt = vm.CreatedAt,
-                    UpdatedAt = vm.UpdatedAt,
                     Files = vm.Files,
                     FileToApiDtos = vm.Image
                     .Select(file => new FileToApiDto
@@ -78,9 +78,6 @@ namespace KindergardenTAR.Controllers
 
                 var result = await _kindergardenServices.Create(dto);
                 if (result == null)
-                {
-                    return RedirectToAction(nameof(Index));
-                }
                 return RedirectToAction(nameof(Index));
             }
             return View(vm);

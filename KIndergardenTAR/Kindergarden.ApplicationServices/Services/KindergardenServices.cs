@@ -25,7 +25,7 @@ namespace Kindergarden.ApplicationServices.Services
         public async Task<KindergardenDomain> Create(KindergardenDto dto)
         {
             KindergardenDomain domain = new();
-            {
+            
                 domain.Id = dto.Id;
                 domain.GroupName = dto.GroupName;
                 domain.ChildrenCount = dto.ChildrenCount;
@@ -34,8 +34,8 @@ namespace Kindergarden.ApplicationServices.Services
                 domain.CreatedAt = DateTime.Now;
                 domain.UpdatedAt = DateTime.Now;
                 _fileServices.FilesToApi(dto, domain);
-            }
-            ;
+            
+            
              await _context.Kindergardens.AddAsync(domain);
             await _context.SaveChangesAsync();
             return domain;
