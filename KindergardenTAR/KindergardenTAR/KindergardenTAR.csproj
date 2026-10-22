@@ -31,4 +31,8 @@
     <ProjectReference Include="..\Kindergarden.Core\Kindergarden.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\multipleFileUpload\" />
+  </ItemGroup>
+
 </Project>

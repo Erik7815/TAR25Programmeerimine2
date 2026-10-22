@@ -38,9 +38,9 @@
         @Html.DisplayFor(model => model.GroupName)
     </div>
 </dl>
-@foreach (var file in Model.Image)
+@foreach (var images in Model.Image)
 {
-    <partial name="_Images" model="file" />
+    <partial name="_Image" model="images" />
     <br />
 }
 <hr />

@@ -8,6 +8,6 @@ namespace Kindergarden.Core.Dto
     {
         public Guid Id { get; set; }
         public string? ExistingFilePath { get; set; }
-        public Guid? SpaceshipId { get; set; }
+        public Guid? KindergardenId { get; set; }
     }
 }

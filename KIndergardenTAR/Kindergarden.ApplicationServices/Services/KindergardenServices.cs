@@ -25,8 +25,8 @@ namespace Kindergarden.ApplicationServices.Services
         public async Task<KindergardenDomain> Create(KindergardenDto dto)
         {
             KindergardenDomain domain = new();
-            
-                domain.Id = dto.Id;
+
+            domain.Id = Guid.NewGuid();
                 domain.GroupName = dto.GroupName;
                 domain.ChildrenCount = dto.ChildrenCount;
                 domain.KindergartenName = dto.KindergartenName;
@@ -42,7 +42,8 @@ namespace Kindergarden.ApplicationServices.Services
         }
         public async Task<KindergardenDomain> Details(Guid id)
         {
-            var domain = await _context.Kindergardens.FindAsync(id);
+            var domain = await _context.Kindergardens
+                .FirstOrDefaultAsync(x => x.Id == id);
             return domain;
         }
         public async Task<KindergardenDomain> Delete(Guid id)
@@ -50,10 +51,18 @@ namespace Kindergarden.ApplicationServices.Services
 
             var result = await _context.Kindergardens
                 .FirstOrDefaultAsync(x => x.Id == id);
-            if (result == null)
-            {
-                return null;
-            }
+
+            var images = await _context.FileToApis
+                .Where(x => x.KindergardenId == id)
+                .Select(y => new FileToApiDto
+                {
+                    Id = y.Id,
+                    KindergardenId = y.KindergardenId,
+                    ExistingFilePath = y.ExistingFilePath,
+                }).ToArrayAsync();
+
+
+            await _fileServices.RemoveImagesFromApi(images);
             _context.Kindergardens.Remove(result);
             await _context.SaveChangesAsync();
 
@@ -62,7 +71,7 @@ namespace Kindergarden.ApplicationServices.Services
         public async Task<KindergardenDomain> Update(KindergardenDto dto)
         {
             KindergardenDomain kindergarden = new();
-            {
+            
                 kindergarden.Id = dto.Id;
                 kindergarden.GroupName = dto.GroupName;
                 kindergarden.ChildrenCount = dto.ChildrenCount;
@@ -71,13 +80,13 @@ namespace Kindergarden.ApplicationServices.Services
                 kindergarden.CreatedAt = dto.CreatedAt;
                 kindergarden.UpdatedAt = DateTime.Now;
                 _fileServices.FilesToApi(dto, kindergarden);
-            }
+            
 
             _context.Kindergardens.Update(kindergarden);
             await _context.SaveChangesAsync();
 
             return kindergarden;
         }
-        //delete
+       
     }
 }
