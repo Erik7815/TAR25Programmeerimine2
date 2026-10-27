@@ -97,7 +97,7 @@ namespace KindergardenTAR.Controllers
                 .Where(x => x.KindergardenId == id)
                 .Select(y => new ImageViewModel
                 {
-                    FilePath = /*"~/multipleFileUpload/" +*/ y.ExistingFilePath,
+                    FilePath = y.ExistingFilePath,
                     ImageId = y.Id,
                     KindergardenId = y.KindergardenId
                 }).ToArrayAsync();

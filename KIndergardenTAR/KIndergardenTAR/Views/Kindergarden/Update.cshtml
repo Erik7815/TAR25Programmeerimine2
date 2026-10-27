@@ -2,7 +2,7 @@
 
 <h1>Update kindergarden</h1>
 
-<div>
+
     <form method="post" enctype="multipart/form-data">
         <input asp-for="Id" type="hidden" />
 
@@ -41,18 +41,18 @@
             </div>
         </div>
 
-        @foreach (var file in Model.Images)
+        @foreach (var image in Model.Images)
         {
-            <partial name="_Images" model="file" />
-            <input asp-action="RemoveImage" asp-controller="Kindergarten" asp-route-imageId="@file.ImageId"
+            <partial name="_Images" model="image" />
+            <input asp-action="RemoveImage" asp-controller="Kindergarden" asp-route-imageId="@image.ImageId"
                    type="submit" class=" btn btn-danger" value="Remove Image" />
             <br />
         }
 
-    </form>
-</div>
+    
 
-<input asp-action="Update" asp-controller="kindegarden" type="submit" class="btn btn-success" value="Update" />
 
+<input asp-action="update" asp-controller="Kindergarden" type="submit" class="btn btn-success" value="Update" />
+</form>
         
        
