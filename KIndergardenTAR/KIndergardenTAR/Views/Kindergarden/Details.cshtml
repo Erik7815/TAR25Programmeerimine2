@@ -51,15 +51,14 @@
     </dl>
 
     
-   @if (Model?.Images != null)
-    {
+   
 
             @foreach (var images in Model.Images)
             {
                 <partial name="_Images" model="images" />
                 <br />
             }
-    }
+    
             <a asp-action="Index" asp-controller="Kindergarden" class="btn btn-secondary">Back to list </a>
 
 </div>

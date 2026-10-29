@@ -42,9 +42,9 @@ namespace Kindergarden.ApplicationServices.Services
         }
         public async Task<KindergardenDomain> Details(Guid id)
         {
-            var domain = await _context.Kindergardens
+            var result = await _context.Kindergardens
                 .FirstOrDefaultAsync(x => x.Id == id);
-            return domain;
+            return result;
         }
         public async Task<KindergardenDomain> Delete(Guid id)
         {
