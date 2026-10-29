@@ -19,6 +19,7 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-image: linear-gradient(to top, black, rgb(57, 18, 54));
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
